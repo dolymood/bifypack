@@ -42,15 +42,6 @@
     "gulp-clean": "^0.3.1",
     "yargs": "^3.30.0",
     "require-dir": "^0.3.0",
-
-    "bundle-collapser": "^1.2.1",
-    
-    "exposify": "^0.5.0",
-    "jstify": "^0.13.0",
-    "lodash.template": "^3.6.2",
-    "partialify": "^3.1.5",
-    "node-lessify": "dolymood/node-lessify",
-
     "commander": "~2.9.0"
   }
 }
