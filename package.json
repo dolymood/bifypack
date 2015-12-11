@@ -1,0 +1,56 @@
+{
+  "name": "bifypack",
+  "version": "0.1.0",
+  "description": "基于gulp和browserify的项目构建工具",
+  "preferGlobal": true,
+  "main": "lib/main.js",
+  "bin": {
+    "bifypack": "./bin/index"
+  },
+  "keywords": ["bifypack", "browserify", "webpack"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dolymood/bifypack.git"
+  },
+  "author": "dolymood",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dolymood/bifypack/issues"
+  },
+  "homepage": "https://github.com/dolymood/bifypack",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "browserify": "^12.0.1",
+    "watchify": "^3.6.1",
+    "factor-bundle": "^2.5.0",
+    "browser-sync": "^2.10.0",
+    "lodash.assign": "^3.2.0",
+    "gulp-if": "^2.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "merge-stream": "^1.0.0",
+    "globby": "^4.0.0",
+    "through2": "^2.0.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-uglify": "^1.4.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-rev-all": "^0.8.22",
+    "gulp-concat": "^2.6.0",
+    "gulp-replace": "dolymood/gulp-replace",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-clean": "^0.3.1",
+    "yargs": "^3.30.0",
+    "require-dir": "^0.3.0",
+
+    "bundle-collapser": "^1.2.1",
+    
+    "exposify": "^0.5.0",
+    "jstify": "^0.13.0",
+    "lodash.template": "^3.6.2",
+    "partialify": "^3.1.5",
+    "node-lessify": "dolymood/node-lessify",
+
+    "commander": "~2.9.0"
+  }
+}

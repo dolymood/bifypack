@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+
+var pkg = require('../package.json')
+var bifypack = require('../lib/main')
+
+program
+  .version(pkg.version)
+  .usage('bifypack <task>')
+
+program.parse(process.argv)
+
+bifypack.run(program.args[0], program)
