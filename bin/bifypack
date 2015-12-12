@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+
+var pkg = require('../package.json')
+var bifypack = require('../lib/main')
+
+program
+  .version(pkg.version)
+  .usage('<task> [options]')
+  .option('-e, --extension <dir>', '自定义额外task的目录')
+
+program.parse(process.argv)
+bifypack.run(program.args[0], program)
