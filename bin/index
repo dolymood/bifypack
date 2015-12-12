@@ -8,6 +8,7 @@ var bifypack = require('../lib/main')
 program
   .version(pkg.version)
   .usage('bifypack <task>')
+  .option('-e, --extension <dir>', '扩展task的目录')
 
 program.parse(process.argv)
 
