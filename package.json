@@ -5,7 +5,7 @@
   "preferGlobal": true,
   "main": "lib/main.js",
   "bin": {
-    "bifypack": "./bin/index"
+    "bifypack": "./bin/bifypack"
   },
   "keywords": ["bifypack", "browserify", "webpack"],
   "repository": {
