@@ -99,14 +99,17 @@ var config = {
 			bundle: { // factor-bundle 生成公共文件 apps/xx/common.js
 			 	'apps/xx/common.js': 'apps/xx/*/*.js'
 			},
-
-			externals: externals, // browserify.externals 以及 exposify transform的expose
+			
+			// 两个用途：
+			// 1. browserify.externals（获取externals的key）
+			// 2. exposify（内置的） transform的expose参数，用于将externals指定require的key替换为全局的对应的值
+			//    也就是说，此时的例子，源码：`var $ = require('jquery')`转换的结果为`var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null)`
+			externals: externals,
 			
 			/**plugins和transforms都需要增加到自己项目的依赖中**/
 			// https://www.npmjs.com/browse/keyword/browserify-plugin
-			plugins: [ // 插件
-				'bundle-collapser/plugin',
-
+			plugins: [ // 插件 内置的插件是bundle-collapser
+				'xx-plugin',
 				// 还可以：
 				{
 					name: 'xx',
@@ -117,13 +120,7 @@ var config = {
 			],
 
 			// https://github.com/substack/node-browserify/wiki/list-of-transforms
-			transforms: [ // transforms
-				{
-					name: 'exposify',
-					options: {
-						expose: externals
-					}
-				},
+			transforms: [ // transforms 已经内置了exposify这个transform
 				{
 					name: 'node-lessify', // 这个是dolymood/node-lessify版本，主要解决插入到页面上的css中的图片路径问题，如果是绝对路径则使用默认node-lessify即可
 					options: {
