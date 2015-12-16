@@ -1,6 +1,6 @@
 {
   "name": "bifypack",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "基于gulp和browserify的项目构建工具",
   "preferGlobal": true,
   "main": "lib/main.js",
@@ -24,6 +24,8 @@
     "browserify": "^12.0.1",
     "watchify": "^3.6.1",
     "factor-bundle": "^2.5.0",
+    "exposify": "^0.5.0",
+    "bundle-collapser": "^1.2.1",
     "browser-sync": "^2.10.0",
     "lodash.assign": "^3.2.0",
     "gulp-if": "^2.0.0",
