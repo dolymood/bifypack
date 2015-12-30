@@ -134,10 +134,9 @@ var config = {
 		},
 
 		normal: { // 正常的通过script任务执行的，主要操作是复制，合并，重命名
-			'lib/jquery.js': 'lib/jquery/*.js',
+			'lib/jquery.js': '!node_modules/jquery/dist/jquery.j', // 注意这里用了! ，当后边跟着的是确定的一个地址的时候才可以使用，也就是说 !xx/*.js 是不可以的
 			'lib/jquery-ui.js': 'lib/jquery-ui/*.js',
-			'lib/avalon.js': 'lib/avalon/avalon.js',
-			'lib/avalon.ui.js': ['lib/mmstate/*.js', 'lib/oniui/*.js']
+			'*': 'lib/avalon/*.js' // 如果key是*的话，那么就会按照原有目录、文件名输出
 		}
 
 	},
