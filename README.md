@@ -1,6 +1,6 @@
 # bifypack
 
-基于[gulp](http://gulpjs.com/)和[browserify](http://browserify.org/)的项目构建工具，名字设想很简单，取`browserify`和`webpack`的结合。
+基于[gulp](http://gulpjs.com/)和[browserify](http://browserify.org/)的项目构建工具。
 
 ## 安装使用
 
