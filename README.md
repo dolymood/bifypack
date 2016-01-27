@@ -4,7 +4,7 @@
 
 ## 安装使用
 
-全局安装：
+### 全局安装：
 
 ```
 npm install -g bifypack
@@ -17,6 +17,23 @@ npm install -g bifypack
 ```
 bifypack <task>
 ```
+
+### 本地安装
+
+```
+npm install bifypack --save-dev
+```
+
+然后在`package.json`中增加如下`script`：
+
+```
+"scripts": {
+  "dev": "bifypack reload",
+  "build": "bifypack rev"
+}
+```
+
+一般场景都适用，开发执行`npm run dev`，上线执行`npm run build`即可。
 
 下面就看默认提供的`task`。
 
@@ -182,7 +199,7 @@ module.exports = config
 
 目前只是支持基础的一些配置，还有额外的很多配置；目前还可以通过自建额外`task`的方式进行增强：
 
-1. 在项目根目录下执行`npm link bifypack`
+1. 如果是全局安装了`bifypack`的话，需要在项目根目录下执行`npm link bifypack`；如果是本地安装则不需要执行这一步了。
 
 2. 在某目录下修改原有的task
 
@@ -198,4 +215,13 @@ gulp.task('marked', ['static'], function () {
 })
 ```
 
-然后这样执行`bifypack marked -e tasks`即可，`tasks`也就是目录名。
+如果你选择了全局安装，那么直接执行`bifypack marked -e tasks`即可（`tasks`也就是任务目录名）；
+
+如果你选择的是本地安装，那么则需要在`package.json`中增加如下`script`：
+
+```
+"scripts": {
+  /** 其他script **/
+  "marked": "bifypack marked -e tasks"
+}
+```
