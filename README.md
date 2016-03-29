@@ -59,11 +59,13 @@ npm install bifypack --save-dev
 
 * `script`: 将指定的浏览器可以直接执行的代码复制（合并）到配置的`dev`目录下，一般会配合用于将html文件中的占位符替换为`<script>`标签。
 
+* `copy`: 复制文件到配置的`dev`目录下。
+
 集成`task`：
 
-* `static`: 也是默认`default`的`task`，执行`browserify`, `html`, `style`, `img`, `script`任务task。
+* `static`: 也是默认`default`的`task`，执行`browserify`, `html`, `style`, `img`, `script`, `copy`任务task。
 
-* `watch`: 主要watch执行`html`, `style`, `img`任务，以及`watchify`任务。
+* `watch`: 主要watch执行`html`, `style`, `img`, `copy`任务，以及`watchify`任务。
 
 * `reload`: 主要利用`watch`task和[browser-sync](http://www.browsersync.io/)实现便利开发。
 
@@ -188,7 +190,8 @@ var config = {
 		'lib/**/*.{' + sexts + '}',
 		'components/**/*.{' + sexts + '}',
 		'pages/**/*.{' + sexts + '}'
-	]
+	],
+	copy: ['font/*.*']
 }
 
 module.exports = config
