@@ -211,8 +211,9 @@ module.exports = config
 var marked = require('gulp-marked')
 var bifypack = require('bifypack')
 var gulp = bifypack.gulp
+var utils = bifypack.utils
 gulp.task('marked', ['static'], function () {
-	return gulp.src(bifypack.config.src + bifypack.config.marked)
+	return gulp.src(utils.getSrc(bifypack.config.marked))
 		.pipe(marked())
 		.pipe(gulp.dest(bifypack.config.dev))
 })
