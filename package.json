@@ -1,6 +1,6 @@
 {
   "name": "bifypack",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "基于gulp和browserify的项目构建工具",
   "main": "lib/main.js",
   "bin": {
