@@ -96,7 +96,9 @@ var config = {
 	bundleMapFile: bundleMapFile, // 默认bifypack.bundleMap.json，这个比较特殊，如果说利用factor-bundle插件生成公共代码文件的话，才会生成这个文件，主要是为了在html中增加新生成的这个公共代码文件的`<script>`标签
 
 	rev: {
-		dontRenameFile: ['.html', '.map', '.jpg', '.jpeg', '.png', '.gif'], // gulp-rev-all的配置，这些文件不重命名
+		manifest: true, // 是否在product目录生成 rev-manifest.json 文件
+		// 正则 如果是字符串的话 会转成正则
+		dontRenameFile: [/\/index\.html$/ig, '.map', '.jpg', '.jpeg', '.png', '.gif'], // gulp-rev-all的配置，这些文件不重命名
 		prefix: { // 根据扩展名的前缀处理
 			'.js': 'http://sj.domain.com/',
 			'.css': 'http://sc.domain.com/',
