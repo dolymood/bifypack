@@ -53,9 +53,9 @@ npm install bifypack --save-dev
 
 * `html`: 主要把配置的`html`文件复制到配置的`dev`目录下；同时这个过程还会将`placeholder`中的规则做替换生成标签插入到html中，还会把利用[factor-bundle](https://github.com/substack/factor-bundle)插件生成公共代码插入到html中。
 
-* `img`: 主要是将配置的`img`资源复制到配置的`dev`目录下，同时会利用[gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)来压缩图片。
+* `img`: 主要是将配置的`img`资源复制到配置的`dev`目录下（注：1.x的版本会利用[gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)来压缩图片，2.x的则不会）。
 
-* `style`: 将指定的入口css文件利用[gulp-minify-css](https://www.npmjs.com/package/gulp-minify-css)压缩，然后复制到配置的`dev`目录下，同时会增加`.map`文件，便于开发调试。一般会配合用于将html文件中的占位符替换为`<link rel="stylesheet">`标签。
+* `style`: 将指定的入口css文件利用[gulp-minify-css](https://www.npmjs.com/package/gulp-minify-css)压缩（注：2.x的版本如果自己设置了`plugins`，那么则不会进行压缩），然后复制到配置的`dev`目录下，同时会增加`.map`文件，便于开发调试。一般会配合用于将html文件中的占位符替换为`<link rel="stylesheet">`标签。
 
 * `script`: 将指定的浏览器可以直接执行的代码复制（合并）到配置的`dev`目录下，一般会配合用于将html文件中的占位符替换为`<script>`标签。
 
@@ -79,6 +79,16 @@ npm install bifypack --save-dev
 
 ```js
 var path = require('path')
+
+// 插件们
+var less = require('gulp-less')
+var LessPluginCleanCSS = require('less-plugin-clean-css')
+var htmlmin = require('gulp-htmlmin')
+var imagemin = require('gulp-imagemin')
+var cleanCSSPlugin = new LessPluginCleanCSS({
+	advanced: true,
+	compatibility: 'ie8'
+})
 
 var src = 'src/'
 var dev = 'dev/' // 加入到 .gitignore
@@ -106,7 +116,7 @@ var config = {
 		}
 		/**
 		 * prefix 还可以是
-		prefix: 'http://s.domain.com/' 
+		prefix: 'http://s.domain.com/'
 		 */
 	},
 	script: { // js相关
@@ -120,13 +130,13 @@ var config = {
 			bundle: { // factor-bundle 生成公共文件 apps/xx/common.js
 			 	'apps/xx/common.js': 'apps/xx/*/*.js'
 			},
-			
+
 			// 两个用途：
 			// 1. browserify.externals（获取externals的key）
 			// 2. exposify（内置的） transform的expose参数，用于将externals指定require的key替换为全局的对应的值
 			//    也就是说，此时的例子，源码：`var $ = require('jquery')`转换的结果为`var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null)`
 			externals: externals,
-			
+
 			/**plugins和transforms都需要增加到自己项目的依赖中**/
 			// https://www.npmjs.com/browse/keyword/browserify-plugin
 			plugins: [ // 插件 内置的插件是bundle-collapser
@@ -180,20 +190,50 @@ var config = {
 			]
 		}
 	},
+  copy: ['font/*.*'],
 
-	html: ['*.html'], // html任务指定源
-	style: [ // style任务指定源
-		'common/common.css',
-		'lib/**/*.css',
-		'pages/**/*.css'
-	],
-	img: [ // img任务指定源
-		'favicon.ico',
-		'lib/**/*.{' + sexts + '}',
-		'components/**/*.{' + sexts + '}',
-		'pages/**/*.{' + sexts + '}'
-	],
-	copy: ['font/*.*']
+  // 注：
+  // 2.x 起新增插件机制
+  // 关于 html style img 三个配置可以配置为如下形式 {src: ['xx'], plugins: []}
+  // 还可以是传统的 1.x 的配置方式，例如：
+  // html: ['**/*.html']
+  // 同样的 style 和 img 也一样可以：
+  // style: ['common/css/g.css']
+  // img: ['components/**/*.{' + exts + '}']
+  html: {
+		src: ['**/*.html'], // html tasks
+		plugins: [
+			function (styleConfig, config, utils) {
+				return htmlmin({
+					collapseWhitespace: true
+				})
+			}
+		]
+	},
+	style: {
+		src: [
+			'common/css/g.less',
+			'app/**/*.less'
+		],
+		plugins: [
+			function (styleConfig, config, utils) {
+				return less({
+					plugins: [cleanCSSPlugin]
+				})
+			}
+		]
+	},
+	img: {
+		src: [
+			'components/**/*.{' + exts + '}',
+			'app/**/*.{' + exts + '}'
+		],
+		plugins: [
+			function (imgConfig, config, utils) {
+				return imagemin()
+			}
+		]
+	}
 }
 
 module.exports = config
