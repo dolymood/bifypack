@@ -105,6 +105,16 @@ var config = {
 	product: product, // 生产目录 默认 dist/
 	bundleMapFile: bundleMapFile, // 默认bifypack.bundleMap.json，这个比较特殊，如果说利用factor-bundle插件生成公共代码文件的话，才会生成这个文件，主要是为了在html中增加新生成的这个公共代码文件的`<script>`标签
 
+  browserSync: {
+    // 可以省略不写 默认 { server: config.dev }
+    // 详细的参数配置见 https://browsersync.io/docs/options
+    // 当前依赖 browsersync 的版本为 2.15.0
+    // 例如 普遍的场景可能会有 port proxy open 等
+    port: 3555, // 端口
+    open: true, // 是否默认打开浏览器
+    proxy: 'localhost/path/' // 代理配置
+  },
+
 	rev: {
 		manifest: true, // 是否在product目录生成 rev-manifest.json 文件
 		// 正则 如果是字符串的话 会转成正则
