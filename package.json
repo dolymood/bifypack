@@ -25,7 +25,7 @@
     "factor-bundle": "^2.5.0",
     "exposify": "^0.5.0",
     "bundle-collapser": "^1.2.1",
-    "browser-sync": "^2.10.0",
+    "browser-sync": "^2.15.0",
     "lodash.assign": "^3.2.0",
     "gulp-if": "^2.0.0",
     "vinyl-source-stream": "^1.1.0",
